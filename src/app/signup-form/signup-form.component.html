@@ -1,4 +1,6 @@
-<form [formGroup] = "form">
+<form [formGroup] = "form" (ngSubmit) = "login()">
+  <div class="alert alert-danger" *ngIf="form.errors.invalidLogin">in valid username or password</div>
+<div formGroupName = "account">
     <div class="form-group">
         <label for="username">Username</label>
         <input
@@ -6,6 +8,7 @@
             id="username"
             type="text"
             class="form-control">
+        <div *ngIf="username.pending"> checking for uniquness</div>
         <div *ngIf="username.touched && username.invalid" class="alert alert-danger">
           <div *ngIf="username.errors.required">Username required</div>
           <div *ngIf="username.errors.minlength">Username shoulb be atleast {{ username.errors.minlength.requiredLength}} characters</div>
@@ -22,5 +25,6 @@
             class="form-control">
             <div *ngIf="password.touched && password.invalid" class="alert alert-danger">Password required</div>
     </div>
+  </div>
     <button class="btn btn-primary" type="submit">Sign Up</button>
 </form>
